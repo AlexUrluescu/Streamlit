@@ -86,6 +86,8 @@ class AskChat():
     # This function receive the chunks and create Embeddings into a Vector Store
     def create_embeddings(self, chunks):
 
+        OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+
         embeddings = OpenAIEmbeddings(
             deployment="adagptmodel",
             model="text-embedding-ada-002",
