@@ -18,10 +18,13 @@ import tiktoken
 class AskChat():
     def __init__(self):
         self.OPENAI_API_TYPE = "azure"
-        self.OPENAI_API_VERSION = os.environ.get("OPENAI_API_VERSION")
-        self.OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-        self.OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE")
+        # self.OPENAI_API_VERSION = os.environ.get("OPENAI_API_VERSION")
+        # self.OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+        # self.OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE")        
         self.OPENAI_API_VERSION = "2023-03-15-preview"
+        self.OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+        self.OPENAI_API_BASE = "https://sbzdfopenai.openai.azure.com/"
+    
 
         # self.database = database
         # self.query = query
