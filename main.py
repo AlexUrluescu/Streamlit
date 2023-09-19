@@ -15,6 +15,11 @@ os.environ.get("OPENAI_API_VERSION")
 st.image("img.png")
 st.subheader("LLM QESTION-ANSWERING APPLICATION")
 
+def clear_history():
+    if "history" in st.session_state:
+        del st.session_state["history"]
+
+
 with st.sidebar:
     api_key = st.text_input("OpenAI API Key:", type="password")
     api_base = st.text_input("OpenAI Base:", type="default")
@@ -28,10 +33,10 @@ with st.sidebar:
     
     uploaded_file = st.file_uploader("Upload a file:", type=["pdf", "docx", "txt"])
 
-    chunk_size = st.number_input("Chunk size", min_value=100, max_value=2048, value=512)
+    chunk_size = st.number_input("Chunk size", min_value=100, max_value=2048, value=512, on_change=clear_history)
 
-    number_relevant_chunks = st.number_input("Number of relevant chunks", min_value = 1, max_value=20, value=3)
-    add_data = st.button("Add Data")
+    number_relevant_chunks = st.number_input("Number of relevant chunks", min_value = 1, max_value=20, value=3, on_change=clear_history)
+    add_data = st.button("Add Data", on_click=clear_history)
 
     if uploaded_file and add_data:
         with st.spinner("Reading, chunking and embedding file ..."):
@@ -62,11 +67,11 @@ if question:
         st.text_area("LLM Answer: ", value=answer)
 
 
-st.divider()
-if "history" not in st.session_state:
-    st.session_state.history = ""
+        st.divider()
+        if "history" not in st.session_state:
+            st.session_state.history = ""
 
-value = f"Question: {question} \nA: {answer}"
-st.session_state.history = f"{value} \n {'-' * 100} \n {st.session_state.history}"
-h = st.session_state.history
-st.text_area(label="Chat History", value = h, key="history", height=400)
+        value = f"Question: {question} \nChat: {answer}"
+        st.session_state.history = f"{value} \n {'-' * 100} \n {st.session_state.history}"
+        h = st.session_state.history
+        st.text_area(label="Chat History", value = h, key="history", height=400)
