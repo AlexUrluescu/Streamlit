@@ -87,12 +87,14 @@ class AskChat():
     def create_embeddings(self, chunks):
 
         OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+        
 
         embeddings = OpenAIEmbeddings(
             deployment="adagptmodel",
             model="text-embedding-ada-002",
             openai_api_base="https://sbzdfopenai.openai.azure.com/",
             openai_api_type="azure",
+            openai_api_key="9ac347d13e834f288a2076ff9c7b418a",
             chunk_size = 1
         )
 
