@@ -1,16 +1,9 @@
 import streamlit as st
 import os
-from dotenv import load_dotenv
 
 from aiClass import AskChat
 
 ai = AskChat()
-
-load_dotenv()
-
-os.environ.get("OPENAI_API_KEY")
-os.environ.get("OPENAI_API_BASE")
-os.environ.get("OPENAI_API_VERSION")
 
 st.image("img.png")
 st.subheader("LLM QESTION-ANSWERING APPLICATION")
