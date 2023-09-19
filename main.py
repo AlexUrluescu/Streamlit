@@ -60,3 +60,13 @@ if question:
         st.write(f"Number of relevant chunks: {number_relevant_chunks}")
         answer = ai.ask_ang_get_answer( vector_store, question, number_relevant_chunks )
         st.text_area("LLM Answer: ", value=answer)
+
+
+st.divider()
+if "history" not in st.session_state:
+    st.session_state.history = ""
+
+value = f"Question: {question} \nA: {answer}"
+st.session_state.history = f"{value} \n {'-' * 100} \n {st.session_state.history}"
+h = st.session_state.history
+st.text_area(label="Chat History", value = h, key="history", height=400)
