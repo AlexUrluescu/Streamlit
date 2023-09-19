@@ -14,14 +14,14 @@ def clear_history():
 
 
 with st.sidebar:
-    # api_key = st.text_input("OpenAI API Key:", type="password")
-    # api_base = st.text_input("OpenAI Base:", type="default")
-    # api_version = st.text_input("OpenAI Version:", type="default")
+    api_key = st.text_input("OpenAI API Key:", type="password")
+    api_base = st.text_input("OpenAI Base:", type="default")
+    api_version = st.text_input("OpenAI Version:", type="default")
 
-    # if api_key and api_base and api_version:
-    #     OPENAI_API_KEY = api_key
-    #     OPENAI_API_BASE = api_base
-    #     OPENAI_API_VERSION = api_version
+    if api_key and api_base and api_version:
+        OPENAI_API_KEY = api_key
+        OPENAI_API_BASE = api_base
+        OPENAI_API_VERSION = api_version
 
     
     uploaded_file = st.file_uploader("Upload a file:", type=["pdf", "docx", "txt"])
