@@ -108,11 +108,15 @@ class AskChat():
     def ask_ang_get_answer(self, vector_store, question, kwargs = 3):
 
         OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+        OPENAI_API_BASE = "https://sbzdfopenai.openai.azure.com/"
+        OPENAI_API_VERSION = "2023-03-15-preview"
 
         llm = AzureChatOpenAI(
             deployment_name = "gpt35-uif54579",
             model_name = "gpt-35-turbo",
-            openai_api_key="9ac347d13e834f288a2076ff9c7b418a"
+            openai_api_key="9ac347d13e834f288a2076ff9c7b418a",
+            openai_api_base = "https://sbzdfopenai.openai.azure.com/",
+            openai_api_version = "2023-03-15-preview"
         )
 
         retriever = vector_store.as_retriever(search_type = "similarity", search_kwargs = {"k": kwargs})
