@@ -14,14 +14,14 @@ def clear_history():
 
 
 with st.sidebar:
-    # api_key = st.text_input("OpenAI API Key:", type="password")
-    # api_base = st.text_input("OpenAI Base:", type="default")
-    # api_version = st.text_input("OpenAI Version:", type="default")
+    api_key = st.text_input("OpenAI API Key:", type="password")
+    api_base = st.text_input("OpenAI Base:", type="default")
+    api_version = st.text_input("OpenAI Version:", type="default")
 
-    # if api_key and api_base and api_version:
-    #     OPENAI_API_KEY = api_key
-    #     OPENAI_API_BASE = api_base
-    #     OPENAI_API_VERSION = api_version
+    if api_key and api_base and api_version:
+        OPENAI_API_KEY = api_key
+        OPENAI_API_BASE = api_base
+        OPENAI_API_VERSION = api_version
 
     
     uploaded_file = st.file_uploader("Upload a file:", type=["pdf", "docx", "txt"])
@@ -45,7 +45,7 @@ with st.sidebar:
             tokens, embedding_cost = ai.calculate_embedding_cost(chunks)
             st.write(f"Embedding cost: ${embedding_cost:.4f}")
 
-            vector_store = ai.create_embeddings(chunks)
+            vector_store = ai.create_embeddings(chunks, OPENAI_API_BASE, OPENAI_API_KEY)
             st.session_state.vs = vector_store
             st.success("File uploaded, chunked and embedded suceessfully")
 
@@ -56,7 +56,7 @@ if question:
     if "vs" in st.session_state:
         vector_store = st.session_state.vs
         st.write(f"Number of relevant chunks: {number_relevant_chunks}")
-        answer = ai.ask_ang_get_answer( vector_store, question, number_relevant_chunks )
+        answer = ai.ask_and_get_answer( vector_store, question, number_relevant_chunks, OPENAI_API_BASE, OPENAI_API_KEY, OPENAI_API_VERSION )
         st.text_area("LLM Answer: ", value=answer)
 
 

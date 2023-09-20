@@ -16,14 +16,14 @@ import tiktoken
 
 
 class AskChat():
-    def __init__(self):
-        self.OPENAI_API_TYPE = "azure"
+    # def __init__(self):
+        # self.OPENAI_API_TYPE = "azure"
         # self.OPENAI_API_VERSION = os.environ.get("OPENAI_API_VERSION")
         # self.OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
         # self.OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE")        
-        self.OPENAI_API_VERSION = "2023-03-15-preview"
-        self.OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
-        self.OPENAI_API_BASE = "https://sbzdfopenai.openai.azure.com/"
+        # self.OPENAI_API_VERSION = "2023-03-15-preview"
+        # self.OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+        # self.OPENAI_API_BASE = "https://sbzdfopenai.openai.azure.com/"
     
 
         # self.database = database
@@ -86,7 +86,7 @@ class AskChat():
 
 
     # This function receive the chunks and create Embeddings into a Vector Store
-    def create_embeddings(self, chunks):
+    def create_embeddings(self, chunks, openai_api_base, openai_api_key):
 
         OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
         
@@ -94,9 +94,9 @@ class AskChat():
         embeddings = OpenAIEmbeddings(
             deployment="adagptmodel",
             model="text-embedding-ada-002",
-            openai_api_base="https://sbzdfopenai.openai.azure.com/",
+            openai_api_base=openai_api_base,
             openai_api_type="azure",
-            openai_api_key="9ac347d13e834f288a2076ff9c7b418a",
+            openai_api_key=openai_api_key,
             chunk_size = 1
         )
 
@@ -105,18 +105,18 @@ class AskChat():
         return vector_store
 
 
-    def ask_ang_get_answer(self, vector_store, question, kwargs = 3):
+    def ask_and_get_answer(self, vector_store, question, kwargs, api_base, api_key, api_version):
 
-        OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
-        OPENAI_API_BASE = "https://sbzdfopenai.openai.azure.com/"
-        OPENAI_API_VERSION = "2023-03-15-preview"
+        # OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+        # OPENAI_API_BASE = "https://sbzdfopenai.openai.azure.com/"
+        # OPENAI_API_VERSION = "2023-03-15-preview"
 
         llm = AzureChatOpenAI(
             deployment_name = "gpt35-uif54579",
             model_name = "gpt-35-turbo",
-            openai_api_key="9ac347d13e834f288a2076ff9c7b418a",
-            openai_api_base = "https://sbzdfopenai.openai.azure.com/",
-            openai_api_version = "2023-03-15-preview"
+            openai_api_key= api_key,
+            openai_api_base = api_base,
+            openai_api_version = api_version
         )
 
         retriever = vector_store.as_retriever(search_type = "similarity", search_kwargs = {"k": kwargs})
