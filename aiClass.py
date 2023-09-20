@@ -31,6 +31,8 @@ class AskChat():
 
     
     def answering(self, database, query):
+        OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+
         embedding_function = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
 
