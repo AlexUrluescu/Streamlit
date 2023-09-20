@@ -86,17 +86,19 @@ class AskChat():
 
 
     # This function receive the chunks and create Embeddings into a Vector Store
-    def create_embeddings(self, chunks, openai_api_base, openai_api_key):
+    def create_embeddings(self, chunks, openai_api_base1, openai_api_key1):
 
-        OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+        # OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+        print(openai_api_base1)
+        print(openai_api_key1)
         
 
         embeddings = OpenAIEmbeddings(
             deployment="adagptmodel",
             model="text-embedding-ada-002",
-            openai_api_base=openai_api_base,
+            openai_api_base=openai_api_base1,
             openai_api_type="azure",
-            openai_api_key=openai_api_key,
+            openai_api_key=openai_api_key1,
             chunk_size = 1
         )
 
