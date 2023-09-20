@@ -4,3 +4,4 @@ Chroma
 tiktoken
 streamlit
 openai
+chromadb
