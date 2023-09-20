@@ -43,7 +43,7 @@ class AskChat():
         # relevant_docs = retriever.get_relevant_documents(self.query)
         # # print(relevant_docs)
 
-        llm = AzureChatOpenAI(deployment_name="gpt35-uif54579", openai_api_key=self.OPENAI_API_KEY, openai_api_base=self.OPENAI_API_BASE, openai_api_version=self.OPENAI_API_VERSION)
+        llm = AzureChatOpenAI(deployment_name="gpt35-uif54579", openai_api_key="9ac347d13e834f288a2076ff9c7b418a", openai_api_base=self.OPENAI_API_BASE, openai_api_version=self.OPENAI_API_VERSION)
 
         chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever = retriever, return_source_documents = True)
 
@@ -107,9 +107,12 @@ class AskChat():
 
     def ask_ang_get_answer(self, vector_store, question, kwargs = 3):
 
+        OPENAI_API_KEY = "9ac347d13e834f288a2076ff9c7b418a"
+
         llm = AzureChatOpenAI(
             deployment_name = "gpt35-uif54579",
-            model_name = "gpt-35-turbo"
+            model_name = "gpt-35-turbo",
+            openai_api_key="9ac347d13e834f288a2076ff9c7b418a"
         )
 
         retriever = vector_store.as_retriever(search_type = "similarity", search_kwargs = {"k": kwargs})
